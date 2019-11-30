@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>OBL Tiles Analytics</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='/static/css/materialize.css' type='text/css' rel='stylesheet'>
+  <link href='/static/css/custom.css' type='text/css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+
+  <script type=text/javascript>
+        $(document).ready(function(){
+
+          $(".custPred").hover(function(){
+            $(this).css('cursor','pointer');
+            }, function() {
+            $(this).css('cursor','auto');
+          });
+
+          $(".custPred").bind("click",function(){
+            window.location.href = "../../analytics"
+          });
+          
+          $(".visAnal").hover(function(){
+            $(this).css('cursor','pointer');
+            }, function() {
+            $(this).css('cursor','auto');
+          });
+
+          $(".visAnal").bind("click",function(){
+            window.location.href = "../../visualize"
+          });
+
+
+
+        });
+  </script>
+
+
+</head>
+
+<body>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="../../" class="brand-logo">Tensors - Deep Analytics Wizard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="../../analytics">CUSTOMER PREDICTION</a></li>
+          <li><a href="../../visualize">VISUAL ANALYTICS</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="row" style="padding:5%">
+      <div class="col offset-m1 offset-l1 s12 m4 l4 custPred">
+          <div class="card large" style="background-image: url('/static/images/customer.jpg') !important;">
+            <div class="card-content custPred">
+              <div class="card-image">
+                <!-- <i class="material-icons large">group_add</i> -->
+              </div>
+              
+            </div>
+            <div class="card-action" >
+              <a href="../../analytics" style="color:black !important; font-weight: bold">CUSTOMER PREDICTION</a>
+            </div>
+          </div>
+      </div>
+       
+      <div class="col offset-m1 offset-l1 s12 m4 l4 visAnal">
+        <div class="card large" style="background-image: url('/static/images/visual.jpg') !important;">
+          <div class="card-content visAnal">
+            <div class="card-image">
+              <!-- <i class="material-icons large">search</i> -->
+            </div>
+  
+          </div>
+          <div class="card-action">
+            <a href="../../visualize"  style="color:black !important; font-weight: bold">VISUAL ANALYSIS</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+   
+  <script type="text/javascript" src="/static/js/materialize.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+
+  <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+
+  </script>  
+
+
+
+</body>
+</html>

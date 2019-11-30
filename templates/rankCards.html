@@ -1,0 +1,18 @@
+{% for j in topN_Names[-1*nVal:]|reverse: %}
+         <div class="col s12 m7">
+          <!-- <h3 class="header">Rank {{loop.index0 + 1 }}</h3> -->
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://lorempixel.com/100/190/nature/6">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <h5>Rank {{loop.index0 + 1 }}</h5>
+              </div>
+              <div class="card-action">
+                <h5>{{j}}</h5>
+              </div>
+            </div>
+          </div>
+         </div>
+{%endfor%}

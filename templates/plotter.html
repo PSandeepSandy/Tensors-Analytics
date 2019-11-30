@@ -1,0 +1,14 @@
+<div class="chart" id="bargraph">
+	<script type="text/javascript" src="/static/js/plotly-latest.min.js"></script>
+	<script type="text/javascript" src="/static/js/d3.min.js"></script>
+    <script>
+        var graphs = {{graph | safe}};
+        var feature = {{feature | tojson}};
+        try{
+        	Plotly.plot('bargraph',graphs,{xaxis:{title:{text:feature }}, yaxis:{title:{text:"Frequency" }}});	
+        }catch(e){
+        	Plotly.plot('bargraph',graphs,{});	
+        }
+    </script>
+</div>
+

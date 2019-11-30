@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>OBL Tiles Analytics</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='/static/css/materialize.css' type='text/css' rel='stylesheet'>
+  <link href='/static/css/custom.css' type='text/css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script type="text/javascript" src="/static/js/plotly-latest.min.js"></script>
+  <script type="text/javascript" src="/static/js/d3.min.js"></script>
+
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+
+  <script type=text/javascript>
+        $(document).ready(function(){
+
+          $(".multiBody").hide();
+          $('input.modeSelection').change(function(){
+            if(($('input.modeSelection').is(":checked")) == false){
+              $(".multiBody").hide();
+              $(".unaryBody").show();
+            }else{
+              $(".unaryBody").hide();
+              $(".multiBody").show();
+            }            
+          });
+
+          $("a.remove").click(function(){
+            var leng = $("div.featuresList").children().length;
+            if(leng>1){
+              $("div.featuresList").children().last().remove();             
+            }            
+          });
+
+          $("a.addFeature").click(function(){
+            var leng = $("div.featuresList").children().length;
+            var givenId = "feature_" + (leng+1).toString();
+            var givenName = givenId;
+            $("div.featuresList").append(
+            '<div class="input-field col l3 m4 s12"><select name="'+givenName+'" id="'+givenId+'"><option value="" disabled selected>List of Feature</option><option value="ERP Size">ERP Size</option><option value="Tile Body">Tile Body</option><option value="Sales Type">Sales Type</option><option value="Price List Ex.">Price List Ex.</option><option value="Colours/Design">Colours/Design</option><option value="Tile Type">Tile Type</option><option value="Wall/Floor">Wall/Floor</option><option value="Item Classification">Item Classification</option><option value="Customer Type">Customer Type</option><option value="Ship to City">Ship to City</option><option value="MRP/Box">MRP/Box</option><option value="MRP /Sqm">MRP /Sqm</option><option value="Total AD/Sqm">Total AD/Sqm</option><option value="Category">Category</option><option value="Category 2">Category 2</option></select></select><label>Select Feature</label></div>'
+            );
+            var elems1 = document.querySelectorAll('select');
+            var instances1 = M.FormSelect.init(elems1);
+          });
+
+          $('a#generateMultiGraph').bind('click',function() {
+            var numFeatures = $("div.featuresList").children().length;
+            var dataF={};
+
+            for(var i=1;i<=numFeatures;++i){
+              dataF['feature_'+i] = $('select[name="feature_'+i+'"]').val();
+            }
+            dataF['numFeatures'] = numFeatures;
+            
+            console.log(dataF)
+            $.ajax({
+              url:"/generateMultiLocGraph",
+              type:"POST",
+              dataType: "json",
+              data: dataF,
+              success: function(resp){
+                console.log("success");
+                $('div.graphMultiSpace').empty();
+                $('div.graphMultiSpace').append(resp.data);
+              }
+            });
+          });
+
+
+          $('a#generateGraph').bind('click',function() {
+            $.ajax({
+              url:"/generateLocGraph",
+              type:"POST",
+              dataType: "json",
+              data: {'feature':$('select[name="featureOne"]').val()},
+              success: function(resp){
+                console.log("success");
+                $('div.graphSpace').empty();
+                $('div.graphSpace').append(resp.data);
+              }
+            });
+          });
+
+        });
+
+  </script>
+
+</head>
+
+<body>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="../../" class="brand-logo">Tensors - Deep Analytics Wizard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="../../analytics">CUSTOMER PREDICTION</a></li>
+          <li><a href="../../visualize">VISUAL ANALYTICS</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <h4 class="col offset-l3 offset-m3 l6 m6 s12"> Geography Specifics : {{cName}} </h4> 
+    </div>
+
+    <div class="row">
+      <div class="switch col offset-l3 offset-m3 l6 m6 s12" style="padding-top:3%; padding-bottom: 3%">
+        <label>
+          <b>Unary Feature Analysis</b>
+          <input type="checkbox" class="modeSelection">
+          <span class="lever"></span>
+          <b>Multiple Feature Analysis</b>
+        </label>
+      </div>      
+    </div>
+
+  <div class="unaryBody">
+    <form class="featuresInput">
+      
+      <div class="row">
+        <div class="input-field col l3 m4 s12">
+                            <select name="featureOne" id="featureOne">
+                              <option value="" disabled selected>List of Feature</option>
+                              <option value="ERP Size">ERP Size</option>
+                              <option value="Tile Body">Tile Body</option>
+                              <option value="Sales Type">Sales Type</option>
+                              <option value="Price List Ex.">Price List Ex.</option>
+                              <option value="Colours/Design">Colours/Design</option>
+                              <option value="Tile Type">Tile Type</option>
+                              <option value="Wall/Floor">Wall/Floor</option>
+                              <option value="Item Classification">Item Classification</option>
+                              <option value="Customer Type">Customer Type</option>
+                              <option value="Ship to City">Ship to City</option>
+                              <option value="MRP/Box">MRP/Box</option>
+                              <option value="MRP /Sqm">MRP /Sqm</option>
+                              <option value="Total AD/Sqm">Total AD/Sqm</option>
+                              <option value="Category">Category</option>
+                              <option value="Category 2">Category 2</option>
+                            </select>
+            <label>Select Feature</label>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col offset-l4 offset-m4 m4 l4 s12">
+          <a id="generateGraph" name="generateGraph" class="waves-effect waves-light btn">Visualize</a>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="graphSpace">
+    </div>
+
+  </div>
+
+  <div class="multiBody">
+    <form class="featuresInput">
+      
+      <div class="row featuresList">
+        <div class="input-field col l3 m4 s12">
+              <select name="feature_1" id="feature_1">
+                <option value="" disabled selected>List of Feature</option>
+                <option value="ERP Size">ERP Size</option>
+                <option value="Tile Body">Tile Body</option>
+                <option value="Sales Type">Sales Type</option>
+                <option value="Price List Ex.">Price List Ex.</option>
+                <option value="Colours/Design">Colours/Design</option>
+                <option value="Tile Type">Tile Type</option>
+                <option value="Wall/Floor">Wall/Floor</option>
+                <option value="Item Classification">Item Classification</option>
+                <option value="Customer Type">Customer Type</option>
+                <option value="Ship to City">Ship to City</option>
+                <option value="MRP/Box">MRP/Box</option>
+                <option value="MRP /Sqm">MRP /Sqm</option>
+                <option value="Total AD/Sqm">Total AD/Sqm</option>
+                <option value="Category">Category</option>
+                <option value="Category 2">Category 2</option>
+              </select>
+            <label>Select Feature</label>
+        </div> 
+      </div>
+
+      <div class="row">
+        <div class="col offset-l3 offset-m3 l2 m2">
+          <a class="btn-floating waves-effect waves-light red addFeature"><i class="material-icons">add</i></a>
+        </div>
+
+        <div class="col l2 m2">
+          <a class="btn-floating btn-small waves-effect waves-light black remove"><i class="material-icons tiny">clear</i></a>  
+        </div>
+
+        <div class="col m4 l4 s12">
+          <a id="generateMultiGraph" name="generateMultiGraph" class="waves-effect waves-light btn">Visualize</a>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="graphMultiSpace">
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="/static/js/materialize.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+  
+  <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var elems1 = document.querySelectorAll('select');
+          var instances1 = M.FormSelect.init(elems1);
+
+          var options3 = {data: {"Sandeep": null,"Swagat": null,"Google": 'https://placehold.it/250x250'},limit: 6};
+          var elems3 = document.querySelectorAll('.customerWise');
+          var instances3 = M.Autocomplete.init(elems3, options3);
+        
+          var options4 = {data: {"Sandeep": null,"Supriya": null,"Google": 'https://placehold.it/250x250'},limit: 6};
+          var elems4 = document.querySelectorAll('.stateWise');
+          var instances4 = M.Autocomplete.init(elems4, options4);
+        
+          var options5 = {data: {"Swagat": null,"Supriya": null,"Google": 'https://placehold.it/250x250'},limit: 6};
+          var elems5 = document.querySelectorAll('.cityWise');
+          var instances5 = M.Autocomplete.init(elems5, options5);
+
+          var elems2 = document.querySelectorAll('.collapsible');
+          var instances2 = M.Collapsible.init(elems2);
+        
+        });        
+
+  </script>  
+
+
+
+</body>
+</html>

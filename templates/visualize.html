@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>OBL Tiles Analytics</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='/static/css/materialize.css' type='text/css' rel='stylesheet'>
+  <link href='/static/css/custom.css' type='text/css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="../../" class="brand-logo">Tensors - Deep Analytics Wizard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="../../analytics">CUSTOMER PREDICTION</a></li>
+          <li><a href="../../visualize">VISUAL ANALYTICS</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <h3 class="col offset-l4 offset-m4 l6 m6 s12"> Visual Analysis </h3> 
+    </div>
+
+    <div class="row">
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Customer Wise</div>
+          <div class="collapsible-body">
+
+            <form action="{{ url_for('customerWise')}}" method="post">
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">textsms</i>
+                      <input type="text" name="custID" id="custID" class="customerWise">
+                      <label>Enter Customer Code</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col offset-l4 offset-s3 offset-m4 l3 m3 s6">
+                  <button type="submit" class="btn btn-primary btn-block btn-large">Analyze</button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </li>
+        
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Geography Wise</div>
+          <div class="collapsible-body">
+            <form action="{{ url_for('geographyWise')}}" method="post">
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">textsms</i>
+                      <input type="text" name="geoID" id="geoID" class="geographyWise">
+                      <label>Enter Geography Specifics</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col offset-l4 offset-s3 offset-m4 l3 m3 s6">
+                  <button type="submit" class="btn btn-primary btn-block btn-large">Analyze</button>
+                </div>
+              </div>
+
+            </form>
+        </li>
+        
+      </ul>
+    </div>
+
+  </div>  
+
+  <script type="text/javascript" src="/static/js/materialize.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+  
+  <script>
+
+       document.addEventListener('DOMContentLoaded', function() {
+          var elems1 = document.querySelectorAll('select');
+          var instances1 = M.FormSelect.init(elems1);
+
+          var options3 = {data: {"Sandeep": null,"Swagat": null,"Google": 'https://placehold.it/250x250'},limit: 6};
+          var elems3 = document.querySelectorAll('.customerWise');
+          var instances3 = M.Autocomplete.init(elems3, options3);
+        
+          var options4 = {data: {"Sandeep": null,"Supriya": null,"Google": 'https://placehold.it/250x250'},limit: 6};
+          var elems4 = document.querySelectorAll('.geographyWise');
+          var instances4 = M.Autocomplete.init(elems4, options4);
+        
+          var elems2 = document.querySelectorAll('.collapsible');
+          var instances2 = M.Collapsible.init(elems2);
+        
+        });        
+
+  </script>  
+
+
+
+</body>
+</html>

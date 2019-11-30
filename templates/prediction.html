@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>OBL Tiles Analytics</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='/static/css/materialize.css' type='text/css' rel='stylesheet'>
+  <link href='/static/css/custom.css' type='text/css' rel='stylesheet'>
+
+
+</head>
+
+<body>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="../../" class="brand-logo">Tensors - Deep Analytics Wizard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="../../analytics">CUSTOMER PREDICTION</a></li>
+          <li><a href="../../visualize">VISUAL ANALYTICS</a></li>
+        </ul>
+      </div>
+    </nav>
+
+   <div class="predictionBody">
+
+    <div class="row">
+      
+      <h3 class="col offset-l4 offset-m4 l6 m6 s12"> TOP-N CUSTOMER PREDICTION </h3> 
+      <!-- <div class="switch col offset-l3 offset-m3 l6 m6 s12" style="padding-top:3%; padding-bottom: 3%">
+        <label>
+          <b>SINGLE PREDICTION MODE</b>
+          <input type="checkbox">
+          <span class="lever"></span>
+          <b>MULTIPLE PREDICTION MODE</b>
+        </label>
+      </div> -->
+
+    </div>
+
+    <div class="row">
+      <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('predict')}}" method="post">
+
+        <div class="input-field col l3 m4 s12">
+          <select name="erpSize" id="erpSize">
+            <option value="" disabled selected>ERP Size</option>
+            <option value="1200X1200">1200X1200</option>
+            <option value="1200X2400">1200X2400</option>
+            <option value="195X1200">195X1200</option>
+            <option value="300X300">300X300</option>
+            <option value="300X450">300X450</option>
+            <option value="300X600">300X600</option>
+            <option value="600X1200">600X1200</option>
+            <option value="600X600">600X600</option>
+            <option value="800X1200">800X1200</option>
+            <option value="800X1600">800X1600</option>
+            <option value="800X800">800X800</option>
+          </select>
+          <label>Select Wall/Floor</label>
+        </div>
+
+        <div class="input-field col l3 m4 s12">
+          <select name="wallFloor" id="wallFloor">
+            <option value="" selected>Choose your option</option>
+            <option value="Wall">Wall</option>
+            <option value="Floor">Floor</option>
+          </select>
+          <label>Select Wall/Floor</label>
+        </div>
+
+        <div class="input-field col l3 m4 s12">
+          <select name="tileBody" id="tileBody">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="Ceramic">Ceramic</option>
+            <option value="Vitrified">Vitrified</option>
+          </select>
+          <label>Select Body Type of Tile</label>
+        </div>
+
+        <div class='input-field col l3 m4 s12'>
+          <input type="text" id="Pcs per Box" name="pcsPerBox" placeholder="Pcs/Box" required="required" />
+          <label for="ppbox">Pcs/Box</label>
+        </div> 
+
+        <!-- <div class="input-field col l3 m4 s12">
+          <select name="color" id="color">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="Botticino Classico">Ceramic</option>
+            <option value="Botticino Classico">Vitrified</option>
+          </select>
+          <label>Select Colour of Tile</label>
+        </div> -->
+
+        <!-- <div class="input-field col l3 m4 s12">
+          <select name="tileType" id="tileType">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="ODH">ODH</option>
+            <option value="ODG">ODG</option>
+            <option value="PGVT">PGVT</option>
+            <option value="SDG">SDG</option>
+            <option value="ODM">ODM</option>
+            <option value="SDM">SDM</option>
+            <option value="SDH">SDH</option>
+            <option value="DGVT">DGVT</option>
+            <option value="SEG">SEG</option>
+          </select>
+          <label>Select the Type of Tile</label>
+        </div> -->
+
+        <div class="input-field col l3 m4 s12">
+          <select name="itemCatCode" id="itemCatCode">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="M001">M001</option>
+            <option value="T001">T001</option>
+          </select>
+          <label>Item Category Code</label>
+        </div>
+
+        <div class='input-field col l3 m4 s12'>
+          <input type="text" id="TotalADSqmt" name="TotalADSqmt" placeholder="Total AD/Sq. Mt." required="required" />
+          <label for="sqmt">Total AD/Sq Mt</label>
+        </div> 
+
+        <div class='input-field col l3 m4 s12'>
+          <input type="text" id="priceListEx" name="priceListEx" placeholder="Price List Ex." required="required" />
+          <label for="sqmt">Price List Ex.</label>
+        </div>
+
+        <div class="input-field col l3 m4 s12">
+          <select name="category" id="category">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="HVP">HVP</option>
+            <option value="Non HVP">Non HVP</option>
+          </select>
+          <label>Select Category</label>
+        </div>
+        
+        <div class="input-field col l3 m4 s12">
+          <select name="category2" id="category2">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="Ceramic">Ceramic</option>
+            <option value="DC">DC</option>
+            <option value="GVT">GVT</option> 
+          </select>
+          <label>Select Category2</label>
+        </div>
+
+        <div class="input-field col l3 m4 s12">
+          <select name="tileType" id="tileType">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="ODG">ODG</option>
+            <option value="ODH">ODH</option>
+            <option value="PGVT">PGVT</option> 
+            <option value="SDG">SDG</option> 
+            <option value="ODM">ODM</option> 
+            <option value="SDM">SDM</option> 
+            <option value="SDH">SDH</option> 
+            <option value="DGVT">DGVT</option> 
+            <option value="SEG">SEG</option> 
+            <option value="Others">Others</option> 
+          </select>
+          <label>Select Tile Type</label>
+        </div>   
+      
+    <div class="row">
+        <div class= "col offset-l5 offset-m5 offset-s2 l4 m4 s8">
+          <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </div>
+
+    </div>
+
+    </form>
+     
+     {{ debug }}
+
+  </div>
+
+</div>
+
+  <script type="text/javascript" src="/static/js/materialize.js"></script>
+
+  <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+
+  </script>  
+
+
+
+</body>
+</html>

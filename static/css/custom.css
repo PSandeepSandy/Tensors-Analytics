@@ -1,0 +1,23 @@
+html,body{
+	min-height:100%;
+	/*background-image: linear-gradient(to bottom right, rgba(0, 0, 0,1), rgba(0, 0, 0,0));*/
+	background-repeat: no-repeat;
+}
+
+.nav-wrapper{
+	background-color: rgba(49, 153, 73,1);
+}
+
+label{
+	font-size:1.0rem !important;
+	color:black !important;	
+	font-weight: bold !important;
+}
+
+.btn{
+	padding-bottom: 10px;
+}
+
+/*.custPred{
+	background-image: url('/static/images/customer.jpg') !important;
+}*/

@@ -1,0 +1,8 @@
+<div class="chart" id="bargraph">
+	<script type="text/javascript" src="/static/js/plotly-latest.min.js"></script>
+	<script type="text/javascript" src="/static/js/d3.min.js"></script>
+    <script>
+        var graphs = {{graph | safe}};
+        Plotly.plot('bargraph',graphs,{margin:{t:0,l:0,r:0,b:0}});	
+    </script>
+</div>

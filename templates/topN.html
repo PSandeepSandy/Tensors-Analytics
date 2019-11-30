@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>OBL Tiles Analytics</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='/static/css/materialize.css' type='text/css' rel='stylesheet'>
+  <link href='/static/css/custom.css' type='text/css' rel='stylesheet'>
+
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+
+  <script type=text/javascript>
+        $(document).ready(function(){
+          $('a#get_nValue').bind('click',function() {
+            console.log('Inside');
+            $.ajax({
+              url:"/generateTopN",
+              type:"POST",
+              dataType: "json",
+              data: {'nValue':$('input[name="topNValue"]').val() },
+              success: function(resp){
+                console.log("success");
+                $('div.rankings').empty();
+                $('div.rankings').append(resp.data);
+              }
+            });
+          });
+
+        });
+
+  </script>
+
+</head>
+
+<body>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="../../" class="brand-logo">Tensors - Deep Analytics Wizard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="../../analytics">CUSTOMER PREDICTION</a></li>
+          <li><a href="../../visualize">VISUAL ANALYTICS</a></li>
+        </ul>
+      </div>
+    </nav>
+
+   <div class="predictionBody">
+
+    <div class="row">
+      
+      <h3 class="col offset-l4 offset-m4 l6 m6 s12"> TopN Prediction </h3> 
+
+    </div>
+
+    <div class="row">
+      <!-- Main Input For Receiving Query to our ML -->
+        <form>
+          <div class="col m8 l8 s12 ">
+            <p class="range-field">
+              <input type="range" name="topNValue" id="topNValue" min="1" max="50" />
+            </p>
+          </div>
+
+          <div class="col m4 l4 s12">
+            <a id="get_nValue" name="get_nValue" class="waves-effect waves-light btn">Generate</a>
+          </div>
+
+        </form>  
+
+    </div>
+     
+    <div class="row rankings">
+         
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/static/js/materialize.js"></script>
+
+  <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+
+  </script>  
+
+
+
+</body>
+</html>

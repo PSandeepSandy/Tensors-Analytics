@@ -6,6 +6,7 @@ import json
 import plotly
 from plotly import graph_objs as go
 from xgboost import XGBClassifier
+import statistics
 
 app = Flask(__name__)
 clf = pickle.load(open('xgB.pickle.dat', 'rb'))

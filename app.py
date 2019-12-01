@@ -320,6 +320,7 @@ def analytics():
 
 @app.route('/generateLocGraph',methods=['POST'])
 def generateLocGraph():
+    global geoSpecific
     feature = str(request.form['feature'])
     graphMonth,graphCount = geoFunction(geoSpecific,feature)
 
@@ -335,6 +336,7 @@ def generateGraph():
 
 @app.route('/generateMultiLocGraph',methods=['POST'])
 def generateMultiLocGraph():
+    global geoSpecific
     featuresList = []
     numFeatures = request.form['numFeatures']
     i = 1

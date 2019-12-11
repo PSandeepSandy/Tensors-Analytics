@@ -82,7 +82,9 @@
               success: function(resp){
                 console.log("success");
                 $('div.graphSpace').empty();
-                $('div.graphSpace').append(resp.data);
+                setTimeout(function(){
+                  $('div.graphSpace').append(resp.data);
+                },1000); 
               }
             });
           });
@@ -130,13 +132,13 @@
                 <option value="ERP Size">ERP Size</option>
                 <option value="Tile Body">Tile Body</option>
                 <option value="Sales Type">Sales Type</option>
-                <option value="Price List Ex.">Price List Ex.</option>
+                <!-- <option value="Price List Ex.">Price List Ex.</option> -->
                 <option value="Color/Design">Color/Design</option>
                 <option value="Tile Type">Tile Type</option>
                 <option value="Wall / Floor">Wall/Floor</option>
                 <option value="Item Classification">Item Classification</option>
-                <option value="Wall/Floor">Wall/Floor</option>
-                <option value="MRP/Box">MRP/Box</option>
+                <!-- <option value="Wall/Floor">Wall/Floor</option> -->
+                <option value="MRP /BOX">MRP/Box</option>
                 <option value="MRP /Sqm">MRP /Sqm</option>
                 <option value="Total AD/Sqm">Total AD/Sqm</option>
                 <option value="Category">Category</option>

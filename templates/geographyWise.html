@@ -67,7 +67,9 @@
               success: function(resp){
                 console.log("success");
                 $('div.graphMultiSpace').empty();
-                $('div.graphMultiSpace').append(resp.data);
+                setTimeout(function(){
+                  $('div.graphMultiSpace').append(resp.data);
+                },1000);
               }
             });
           });
@@ -82,7 +84,9 @@
               success: function(resp){
                 console.log("success");
                 $('div.graphSpace').empty();
-                $('div.graphSpace').append(resp.data);
+                setTimeout(function(){
+                  $('div.graphSpace').append(resp.data);
+                },1000);
               }
             });
           });

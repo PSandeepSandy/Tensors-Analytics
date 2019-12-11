@@ -1,18 +1,18 @@
-{% for j in topN_Names[-1*nVal:]|reverse: %}
-         <div class="col offset-m3 offset-l3 s12 m6 l6">
-          <!-- <h3 class="header">Rank {{loop.index0 + 1 }}</h3> -->
-          <div class="card horizontal">
-            <div class="card-image">
-              <i class="large material-icons">assignment_ind</i>
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <h5>Rank {{loop.index0 + 1 }}</h5>
-              </div>
-              <div class="card-action">
-                <h5>{{j}}</h5>
-              </div>
-            </div>
-          </div>
-         </div>
-{%endfor%}
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>Rank</th>
+              <th>Customer Name</th>
+              <!-- <th>Item Price</th> -->
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for j in topN_Names[-1*nVal:]|reverse: %}
+                   <tr>
+                      <td>{{loop.index0 + 1 }}</td>
+                      <td>{{j}}</td>
+                   </tr>
+          {%endfor%}
+        </tbody>
+      </table>

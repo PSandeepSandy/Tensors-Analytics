@@ -67,6 +67,7 @@
               data: dataF,
               success: function(resp){
                 console.log("success");
+                $('div.graphSpace').empty();
                 $('div.graphMultiSpace').empty();
                 setTimeout(function(){
                   $('div.graphMultiSpace').append(resp.data);

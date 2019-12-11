@@ -19,7 +19,7 @@
         var graphCount = {{graphCount | safe}};
         var feature = {{feature | tojson}};
         try{
-            Plotly.plot('secondGraph',graphCount,{xaxis:{title:{text:feature }}, yaxis:{title:{text:"Frequency" }}});  
+            Plotly.plot('secondGraph',graphCount,{ xaxis:{title:{text:"Frequency" }}, yaxis:{title:{text:feature }}} );  
         }catch(e){
             Plotly.plot('secondGraph',graphCount,{});  
         }

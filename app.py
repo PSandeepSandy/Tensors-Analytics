@@ -368,7 +368,7 @@ def generateMultiGraph():
 @app.route('/generateTopN',methods=['POST'])
 def generateTopN():
     nVal = int(request.form['nValue'])
-    
+    global topN_Names
     return jsonify({'data': render_template("rankCards.html", nVal = nVal,topN_Names = topN_Names)})
 
 @app.route('/visualize/customerWise', methods=['POST'])

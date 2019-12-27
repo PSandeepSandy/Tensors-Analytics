@@ -20,7 +20,7 @@ givenData = pickle.load(open('geoPlot.pkl','rb'))
 cityList=list(givenData['Customer City'].unique())
 stateList=list(givenData['State'].unique())
 reviewZoneList=list(givenData['Review Zone'].unique())
-reTerritoryList=list(givenData['Re Territory'].unique())
+reTerritoryList=['N.East', 'Patna', 'Ranchi', 'Delhi', 'Chandigarh', 'Kolkata', 'Indore', 'Jaipur', 'Noida', 'Dehradun', 'Jammu', 'Sonipat', 'Punjab', 'Agra', 'Nepal', 'Lucknow', 'Raipur', 'Parwanoo', 'Vijaywada', 'Misc.', 'Andaman', 'Bbsr', 'Vadodara', 'Bangalore', 'Chennai', 'Pune', 'Madurai', 'Thrissur', 'Calicut', 'Vizag', 'Cochin', 'Coimbatore', 'Mumbai', 'Trichy', 'Goa', 'Hyderabad', 'Hubli']
 
 #Final Function for hosting
 
@@ -152,11 +152,11 @@ def sunburst_state(state,feature_list):
   elif(state in reviewZoneList):
     train = df_binned[df_binned['Review Zone']==state]
     no_of_data = train.shape[0]
-    labels,ids,parents,values = ['Review Zone: '+state],['City: '+state],[""],[no_of_data]
+    labels,ids,parents,values = ['Review Zone: '+state],['Review Zone: '+state],[""],[no_of_data]
   elif(state in reTerritoryList):
     train = df_binned[df_binned['Re Territory']==state]
     no_of_data = train.shape[0]
-
+    labels,ids,parents,values = ['Re Territory: '+state],['Re Territory: '+state],[""],[no_of_data]
   
   print("Number of data rows for this Geography:",no_of_data)
   

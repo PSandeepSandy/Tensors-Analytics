@@ -157,6 +157,7 @@ def sunburst_state(state,feature_list):
     train = df_binned[df_binned['Re Territory']==state]
     no_of_data = train.shape[0]
     labels,ids,parents,values = ['Re Territory: '+state],['Re Territory: '+state],[""],[no_of_data]
+
   
   print("Number of data rows for this Geography:",no_of_data)
   
@@ -178,7 +179,7 @@ def sunburst_state(state,feature_list):
 
   data = [go.Sunburst(ids=ids,labels=labels,parents=parents,values=values,branchvalues="total",)]
   graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
-  return graphJSON 
+  return graphJSON
 
 # def sunburst_city(city,feature_list):
 #   train = df_binned[df_binned['Customer City']==city]
@@ -302,7 +303,7 @@ def customer_item_preference(customer_code,feature):
   item_columns = ['Item name','Pcs Prem','ERP Size','Wall / Floor','Tile Type','Color/Design','Tile Body','Item Classification','Item Cat. Code','Category','Category 2','Ship-to City','FY']
   numeric_columns = ['AD1/Sqm','AD2/Sqm','AD3/Sqm','AD4/Sqm','AD5/Sqm','AD6/Sqm','Sq. Mt.','Total AD/Sqm','Billing Rate/Sqm','Buyer Rate/Sqm','MRP /BOX','MRP /Sqm','Value','Price List Ex.',]
   customer_columns = ['Review Zone','Re Territory','Customer City','Customer Type','Sales Type','Customer Name & City','State','Date']
-  if feature in item_columns + customer_columns:  return feature_analysis(train,feature)
+  if (feature in (item_columns+customer_columns)):  return feature_analysis(train,feature)
   elif feature in numeric_columns:  return numeric_feature(train,feature)
   else:  print("This feature does not exist")
 
@@ -313,6 +314,14 @@ geoSpecific = ""
 
 @app.route('/')
 def home():
+    print(cityList)
+    print("*****************")
+    print(stateList)
+    print("*****************")
+    print(reviewZoneList)
+    print("*****************")
+    print(reTerritoryList)
+    print("*****************")
     return render_template('index.html')
 
 @app.route('/analytics')
